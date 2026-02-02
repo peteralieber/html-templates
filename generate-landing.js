@@ -1,4 +1,61 @@
-<!DOCTYPE html>
+#!/usr/bin/env node
+
+/**
+ * Script to generate the main landing page (index.html) by scanning
+ * subdirectories for template.json files.
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+// Get all subdirectories that contain a template.json file
+function findTemplates() {
+  const templates = [];
+  const rootDir = __dirname;
+  
+  // Read all items in the root directory
+  const items = fs.readdirSync(rootDir, { withFileTypes: true });
+  
+  // Filter for directories only (exclude hidden directories)
+  const directories = items.filter(item => 
+    item.isDirectory() && !item.name.startsWith('.')
+  );
+  
+  // Check each directory for template.json
+  for (const dir of directories) {
+    const templateJsonPath = path.join(rootDir, dir.name, 'template.json');
+    
+    if (fs.existsSync(templateJsonPath)) {
+      try {
+        const data = JSON.parse(fs.readFileSync(templateJsonPath, 'utf8'));
+        templates.push({
+          title: data.title,
+          description: data.description,
+          path: data.path
+        });
+      } catch (error) {
+        console.error(`Error reading ${templateJsonPath}:`, error.message);
+      }
+    }
+  }
+  
+  return templates;
+}
+
+// Generate the HTML for template cards
+function generateTemplateCards(templates) {
+  return templates.map(template => `      <a href="${template.path}" class="template-card">
+        <h2>${template.title}</h2>
+        <p>${template.description}</p>
+        <span class="view-button">View Template →</span>
+      </a>`).join('\n\n');
+}
+
+// Generate the full index.html content
+function generateIndexHtml(templates) {
+  const templateCards = generateTemplateCards(templates);
+  
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -132,17 +189,7 @@
     </header>
 
     <div class="templates-grid">
-      <a href="tailwind-html/index.html" class="template-card">
-        <h2>Tailwind HTML</h2>
-        <p>A documentation template using Tailwind CSS for styling. Features a clean sidebar layout with modern typography and responsive design.</p>
-        <span class="view-button">View Template →</span>
-      </a>
-
-      <a href="vanilla-html/index.html" class="template-card">
-        <h2>Vanilla HTML</h2>
-        <p>A minimal static documentation template with sidebar navigation. Clean HTML, CSS, and JavaScript — no frameworks required.</p>
-        <span class="view-button">View Template →</span>
-      </a>
+${templateCards}
     </div>
 
     <footer class="footer">
@@ -154,3 +201,29 @@
   </div>
 </body>
 </html>
+`;
+}
+
+// Main execution
+function main() {
+  console.log('Scanning for templates...');
+  const templates = findTemplates();
+  
+  console.log(`Found ${templates.length} template(s):`);
+  templates.forEach(t => console.log(`  - ${t.title}`));
+  
+  if (templates.length === 0) {
+    console.warn('No templates found. Make sure subdirectories have template.json files.');
+    return;
+  }
+  
+  console.log('\nGenerating index.html...');
+  const html = generateIndexHtml(templates);
+  
+  const indexPath = path.join(__dirname, 'index.html');
+  fs.writeFileSync(indexPath, html, 'utf8');
+  
+  console.log('✓ index.html generated successfully!');
+}
+
+main();
