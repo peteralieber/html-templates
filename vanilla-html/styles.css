@@ -118,8 +118,8 @@ body {
   border-right: 1px solid #e5e5e5;
   padding: 24px;
   position: sticky;
-  top: 0;
-  height: 100vh;
+  top: 73px;
+  height: calc(100vh - 73px);
   overflow-y: auto;
 }
 
@@ -199,7 +199,7 @@ ul {
   .content {
     padding: 24px;
   }
-  
+
   .header {
     padding: 12px 16px;
   }
@@ -207,7 +207,7 @@ ul {
   .logo-text {
     font-size: 1.1rem;
   }
-  
+
   .logo-icon {
     width: 32px;
     height: 32px;
@@ -216,7 +216,7 @@ ul {
   .header-right {
     gap: 12px;
   }
-  
+
   .search-box {
     width: 150px;
   }
@@ -226,11 +226,11 @@ ul {
   .social-links {
     gap: 12px;
   }
-  
+
   .social-links a {
     font-size: 1.1rem;
   }
-  
+
   .search-box {
     width: 120px;
     font-size: 0.85rem;
