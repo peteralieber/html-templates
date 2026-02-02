@@ -5,6 +5,7 @@ _site/
 .jekyll-metadata
 Gemfile.lock
 vendor/
+.bundle/
 
 # Backup files
 *.old
