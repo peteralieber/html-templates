@@ -8,6 +8,35 @@
 const fs = require('fs');
 const path = require('path');
 
+/**
+ * Escape HTML special characters to prevent XSS
+ */
+function escapeHtml(text) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, m => map[m]);
+}
+
+/**
+ * Validate that the path is a safe relative path within the repository
+ */
+function isValidPath(templatePath) {
+  // Must be a relative path (not starting with / or containing ..)
+  if (templatePath.startsWith('/') || templatePath.includes('..')) {
+    return false;
+  }
+  // Should not be an external URL
+  if (templatePath.match(/^[a-z]+:\/\//i)) {
+    return false;
+  }
+  return true;
+}
+
 // Get all subdirectories that contain a template.json file
 function findTemplates() {
   const templates = [];
@@ -28,6 +57,19 @@ function findTemplates() {
     if (fs.existsSync(templateJsonPath)) {
       try {
         const data = JSON.parse(fs.readFileSync(templateJsonPath, 'utf8'));
+        
+        // Validate required fields
+        if (!data.title || !data.description || !data.path) {
+          console.warn(`Skipping ${templateJsonPath}: missing required fields`);
+          continue;
+        }
+        
+        // Validate path safety
+        if (!isValidPath(data.path)) {
+          console.warn(`Skipping ${templateJsonPath}: invalid path "${data.path}"`);
+          continue;
+        }
+        
         templates.push({
           title: data.title,
           description: data.description,
@@ -44,9 +86,9 @@ function findTemplates() {
 
 // Generate the HTML for template cards
 function generateTemplateCards(templates) {
-  return templates.map(template => `      <a href="${template.path}" class="template-card">
-        <h2>${template.title}</h2>
-        <p>${template.description}</p>
+  return templates.map(template => `      <a href="${escapeHtml(template.path)}" class="template-card">
+        <h2>${escapeHtml(template.title)}</h2>
+        <p>${escapeHtml(template.description)}</p>
         <span class="view-button">View Template →</span>
       </a>`).join('\n\n');
 }
