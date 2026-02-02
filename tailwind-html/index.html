@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Docs Template - Tailwind</title>
+
+  <!-- Inter and JetBrains Mono fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Custom font families */
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: #1a1a1a;
+      background-color: #fafafa;
+    }
+    pre, code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex bg-fafafa">
+
+  <!-- Sidebar -->
+  <aside class="hidden md:flex flex-col w-64 bg-white border-r border-gray-200 sticky top-0 h-screen p-6">
+    <div class="text-xl font-bold mb-6">MyDocs</div>
+    <nav class="flex flex-col space-y-2">
+      <a href="#" class="text-gray-600 hover:text-black font-semibold">Intro</a>
+      <a href="#" class="text-gray-500 hover:text-black">Install</a>
+      <a href="#" class="text-gray-500 hover:text-black">Configure</a>
+      <a href="#" class="text-gray-500 hover:text-black">Usage</a>
+      <a href="#" class="text-gray-500 hover:text-black">Troubleshooting</a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="flex-1 max-w-4xl mx-auto p-12">
+    <h1 class="text-3xl font-bold mb-6">Intro</h1>
+    <p class="mb-6">
+      This is a minimal static template inspired by the OpenCode documentation layout.
+      No React, no frameworks — just clean HTML, CSS, and a tiny bit of JS.
+    </p>
+
+    <h2 class="text-xl font-semibold mt-12 mb-4">Overview</h2>
+    <p class="mb-6">
+      You can expand this into a full documentation system with markdown rendering,
+      search, or multi-page navigation.
+    </p>
+
+    <pre class="bg-gray-100 border border-gray-300 rounded-md p-4 mb-8 overflow-x-auto text-sm">
+curl -fsSL https://example.com/install | bash
+    </pre>
+
+    <h2 class="text-xl font-semibold mt-12 mb-4">Next Steps</h2>
+    <ul class="list-disc list-inside space-y-2">
+      <li>Add more pages</li>
+      <li>Customize the theme</li>
+      <li>Integrate a static site generator (optional)</li>
+    </ul>
+  </main>
+
+</body>
+</html>
