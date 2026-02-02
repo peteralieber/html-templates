@@ -13,6 +13,10 @@ from pathlib import Path
 from html import escape as html_escape
 
 
+# Compile regex pattern once for better performance
+URL_PATTERN = re.compile(r'^[a-z]+://', re.IGNORECASE)
+
+
 def escape_html(text):
     """Escape HTML special characters to prevent XSS"""
     return html_escape(text, quote=True)
@@ -27,7 +31,7 @@ def is_valid_path(template_path):
         return False
     
     # Should not be an external URL
-    if re.match(r'^[a-z]+://', template_path, re.IGNORECASE):
+    if URL_PATTERN.match(template_path):
         return False
     
     return True
