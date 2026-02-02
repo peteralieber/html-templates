@@ -10,11 +10,65 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for social media icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-logo">
+      <svg class="logo-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <!-- Vanilla bean pod -->
+        <g>
+          <!-- Main pod body -->
+          <path d="M15 5 Q10 8, 10 15 L10 30 Q10 35, 15 35 L17 35 Q22 35, 22 30 L22 15 Q22 8, 17 5 Z" fill="#3d2817" stroke="#2d1f13" stroke-width="0.5"/>
+          <!-- Split line showing vanilla seeds -->
+          <line x1="16" y1="10" x2="16" y2="32" stroke="#1a1208" stroke-width="0.8" stroke-dasharray="1,1"/>
+          <!-- Vanilla seeds (dots) -->
+          <circle cx="15.5" cy="12" r="0.4" fill="#0a0604"/>
+          <circle cx="16.5" cy="14" r="0.4" fill="#0a0604"/>
+          <circle cx="15.5" cy="16" r="0.4" fill="#0a0604"/>
+          <circle cx="16.5" cy="18" r="0.4" fill="#0a0604"/>
+          <circle cx="15.5" cy="20" r="0.4" fill="#0a0604"/>
+          <circle cx="16.5" cy="22" r="0.4" fill="#0a0604"/>
+          <circle cx="15.5" cy="24" r="0.4" fill="#0a0604"/>
+          <circle cx="16.5" cy="26" r="0.4" fill="#0a0604"/>
+          <circle cx="15.5" cy="28" r="0.4" fill="#0a0604"/>
+          <circle cx="16.5" cy="30" r="0.4" fill="#0a0604"/>
+          <!-- Stem curl at top -->
+          <path d="M16 5 Q14 3, 12 4" fill="none" stroke="#4a6741" stroke-width="1" stroke-linecap="round"/>
+        </g>
+      </svg>
+      <span class="logo-text">Vanilla HTML</span>
+    </div>
+    
+    <div class="header-right">
+      <nav class="social-links">
+        <a href="https://github.com/yourusername" target="_blank" rel="noopener" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://twitter.com/yourusername" target="_blank" rel="noopener" title="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener" title="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://discord.gg/yourinvite" target="_blank" rel="noopener" title="Discord">
+          <i class="fab fa-discord"></i>
+        </a>
+      </nav>
+      
+      <div class="search-container">
+        <input type="search" class="search-box" placeholder="Search docs..." />
+        <i class="fas fa-search search-icon"></i>
+      </div>
+    </div>
+  </header>
+
   <div class="layout">
 
     <!-- Sidebar -->
