@@ -6,6 +6,7 @@
 }
 
 :root {
+  /* Header height: 16px top padding + 16px bottom padding + 40px logo height + 1px border = 73px */
   --header-height: 73px;
 }
 
