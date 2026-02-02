@@ -1,0 +1,42 @@
+name: Generate Landing Page
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      
+      - name: Generate landing page
+        run: python3 generate-landing.py
+      
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --exit-code index.html || echo "changed=true" >> $GITHUB_OUTPUT
+      
+      - name: Commit and push changes
+        if: steps.git-check.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add index.html
+          git commit -m "Auto-generate landing page [skip ci]"
+          git push
