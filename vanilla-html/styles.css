@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'IBM Plex Mono', ui-monospace, Consolas, system-ui, sans-serif;
   color: #1a1a1a;
   background: #fafafa;
   line-height: 1.6;
