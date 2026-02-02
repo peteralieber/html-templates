@@ -19,13 +19,13 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          node-version: '18'
+          python-version: '3.x'
       
       - name: Generate landing page
-        run: node generate-landing.js
+        run: python3 generate-landing.py
       
       - name: Check for changes
         id: git-check
