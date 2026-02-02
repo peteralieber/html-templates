@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   color: #1a1a1a;
   background: #fafafa;
   line-height: 1.6;
@@ -91,7 +91,7 @@ ul {
   padding: 16px;
   border-radius: 6px;
   margin: 20px 0;
-  font-family: ui-monospace, monospace;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 0.9rem;
   overflow-x: auto;
 }
