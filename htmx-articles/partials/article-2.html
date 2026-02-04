@@ -1,0 +1,56 @@
+<div class="article-content">
+  <a href="#" 
+     hx-get="partials/home.html" 
+     hx-target="#main-content" 
+     hx-swap="innerHTML swap:0.4s"
+     hx-push-url="false"
+     class="back-link">Back to all articles</a>
+
+  <h1>Building Dynamic UIs Without Frameworks</h1>
+  <div class="meta">Published: January 22, 2024 • 7 min read • By Marcus Rodriguez</div>
+
+  <p>For years, the web development community has been told that building dynamic user interfaces requires heavy JavaScript frameworks like React, Vue, or Angular. But what if there was another way? What if we could create responsive, interactive UIs using the web platform itself?</p>
+
+  <h2>The Framework Fatigue Problem</h2>
+  
+  <p>Modern JavaScript frameworks have brought us incredible capabilities, but they've also introduced significant complexity. Build configurations, state management libraries, component lifecycles, virtual DOM reconciliation—the list goes on. For many projects, especially smaller ones, this complexity is overkill.</p>
+
+  <p>Consider a simple blog with article navigation. Do you really need to download hundreds of kilobytes of JavaScript, set up a state management system, and configure a build pipeline? Or could you achieve the same result with a fraction of the code?</p>
+
+  <h2>HTML-First Development</h2>
+
+  <p>HTMX embraces an HTML-first approach to development. Instead of writing JavaScript to manipulate the DOM, you declare your interactions directly in HTML. This approach has several benefits:</p>
+
+  <p><strong>Simplicity:</strong> Your HTML describes both structure and behavior. There's no JavaScript layer to maintain separately.</p>
+
+  <p><strong>Performance:</strong> HTMX itself is tiny (14kb minified and gzipped), and you're not shipping megabytes of framework code to your users.</p>
+
+  <p><strong>Maintainability:</strong> Less code means fewer bugs and easier maintenance. Your team can focus on building features rather than managing complexity.</p>
+
+  <h2>Building a Dynamic Article System</h2>
+
+  <p>Let's look at a practical example: this very article system you're using right now. When you click on an article from the homepage, several things happen:</p>
+
+  <p>1. An HTTP request is made to fetch the article content</p>
+  <p>2. The response (a partial HTML page) is received</p>
+  <p>3. The main content area smoothly transitions to show the new content</p>
+  <p>4. The back button returns you to the article list</p>
+
+  <p>All of this happens without writing a single line of JavaScript. The HTMX attributes handle the AJAX requests, DOM updates, and animations automatically.</p>
+
+  <h2>Progressive Enhancement</h2>
+
+  <p>One of the most powerful aspects of this approach is progressive enhancement. If JavaScript is disabled or HTMX fails to load, your site still functions—it just falls back to traditional page navigation. This graceful degradation ensures your content is accessible to all users.</p>
+
+  <h2>Server-Side Flexibility</h2>
+
+  <p>Because HTMX works with HTML fragments from your server, you have complete freedom in your backend choice. Python with Flask or Django, Node.js with Express, Ruby on Rails, PHP, Go, Rust—it doesn't matter. Your server just needs to return HTML, which any web framework can do easily.</p>
+
+  <p>This also means you can leverage server-side templating engines you're already familiar with. No need to learn a new component syntax or JSX.</p>
+
+  <h2>Conclusion</h2>
+
+  <p>Building dynamic UIs without heavyweight frameworks isn't just possible—it's often the better choice. By working with the web platform rather than against it, you can create fast, maintainable applications that provide excellent user experiences without the complexity tax of modern frameworks.</p>
+
+  <p>HTMX proves that we don't need to abandon the principles of progressive enhancement and semantic HTML to build modern web applications. Sometimes, the best solution is the simplest one.</p>
+</div>
