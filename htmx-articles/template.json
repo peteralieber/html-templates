@@ -1,0 +1,5 @@
+{
+  "title": "HTMX Articles",
+  "description": "A static HTML template demonstrating HTMX for seamless article navigation. Click articles to load content dynamically without full page reloads.",
+  "path": "htmx-articles/index.html"
+}
