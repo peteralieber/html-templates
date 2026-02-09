@@ -1,9 +1,13 @@
+---
+layout: default
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HTML Templates - Collection</title>
+  {% seo %}
   <style>
     * {
       margin: 0;
@@ -26,7 +30,7 @@
     }
 
     .header {
-      margin-bottom: 60px;
+      margin-bottom: 40px;
     }
 
     .header h1 {
@@ -41,6 +45,35 @@
       font-size: 1.125rem;
       color: #666;
       line-height: 1.6;
+    }
+
+    .search-box {
+      margin-bottom: 40px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 16px 20px;
+      font-size: 1rem;
+      border: 2px solid #e5e5e5;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.2s ease;
+      font-family: inherit;
+    }
+
+    .search-input:focus {
+      border-color: #1a1a1a;
+    }
+
+    .search-input::placeholder {
+      color: #999;
+    }
+
+    .search-results {
+      margin-bottom: 20px;
+      color: #666;
+      font-size: 0.9375rem;
     }
 
     .templates-grid {
@@ -64,6 +97,10 @@
     .template-card:hover {
       border-color: #1a1a1a;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .template-card.hidden {
+      display: none;
     }
 
     .template-card h2 {
@@ -90,6 +127,18 @@
 
     .template-card:hover .view-button {
       opacity: 0.7;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: #666;
+      font-size: 1.125rem;
+      display: none;
+    }
+
+    .no-results.visible {
+      display: block;
     }
 
     .footer {
@@ -131,18 +180,34 @@
       <p>A collection of clean, ready-to-use HTML templates</p>
     </header>
 
-    <div class="templates-grid">
-      <a href="vanilla-html/index.html" class="template-card">
-        <h2>Vanilla HTML</h2>
-        <p>A minimal static documentation template with sidebar navigation. Clean HTML, CSS, and JavaScript — no frameworks required.</p>
-        <span class="view-button">View Template →</span>
-      </a>
+    <div class="search-box">
+      <input 
+        type="text" 
+        id="searchInput" 
+        class="search-input" 
+        placeholder="Search templates by name or description..."
+        autocomplete="off"
+      />
+    </div>
 
-      <a href="tailwind-html/index.html" class="template-card">
-        <h2>Tailwind HTML</h2>
-        <p>A documentation template using Tailwind CSS for styling. Features a clean sidebar layout with modern typography and responsive design.</p>
+    <div class="search-results" id="searchResults"></div>
+
+    <div class="templates-grid" id="templatesGrid">
+      {% for template in site.data.templates %}
+      <a href="{{ template.path | relative_url }}" 
+         class="template-card" 
+         data-title="{{ template.title | downcase }}"
+         data-description="{{ template.description | downcase }}"
+         data-directory="{{ template.directory | downcase }}">
+        <h2>{{ template.title }}</h2>
+        <p>{{ template.description }}</p>
         <span class="view-button">View Template →</span>
       </a>
+      {% endfor %}
+    </div>
+
+    <div class="no-results" id="noResults">
+      No templates found matching your search.
     </div>
 
     <footer class="footer">
@@ -152,5 +217,71 @@
       </p>
     </footer>
   </div>
+
+  <script>
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    const templatesGrid = document.getElementById('templatesGrid');
+    const searchResults = document.getElementById('searchResults');
+    const noResults = document.getElementById('noResults');
+    const templateCards = document.querySelectorAll('.template-card');
+    const totalTemplates = templateCards.length;
+
+    function performSearch() {
+      const query = searchInput.value.toLowerCase().trim();
+      
+      if (query === '') {
+        // Show all templates
+        templateCards.forEach(card => card.classList.remove('hidden'));
+        searchResults.textContent = '';
+        noResults.classList.remove('visible');
+        return;
+      }
+
+      let visibleCount = 0;
+      
+      templateCards.forEach(card => {
+        const title = card.dataset.title;
+        const description = card.dataset.description;
+        const directory = card.dataset.directory;
+        
+        // Check if query matches title, description, or directory name
+        const matches = title.includes(query) || 
+                       description.includes(query) || 
+                       directory.includes(query);
+        
+        if (matches) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      // Update results message
+      if (visibleCount > 0) {
+        searchResults.textContent = `Showing ${visibleCount} of ${totalTemplates} template${visibleCount !== 1 ? 's' : ''}`;
+        noResults.classList.remove('visible');
+      } else {
+        searchResults.textContent = '';
+        noResults.classList.add('visible');
+      }
+    }
+
+    // Debounce search for better performance
+    let searchTimeout;
+    searchInput.addEventListener('input', () => {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(performSearch, 200);
+    });
+
+    // Allow clearing search with Escape key
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        searchInput.value = '';
+        performSearch();
+      }
+    });
+  </script>
 </body>
 </html>

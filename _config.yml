@@ -1,0 +1,28 @@
+# Jekyll configuration for HTML Templates
+title: HTML Templates
+description: A collection of clean, ready-to-use HTML templates
+baseurl: "" # Leave empty for root domain, or set to /repository-name for GitHub Pages
+url: "" # Will be set by GitHub Pages automatically
+
+# Build settings
+markdown: kramdown
+theme: null
+
+# Collections and excludes
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .git
+  - .github
+  - generate-landing.py
+  - node_modules
+  - README.md
+
+# Include files/dirs that start with underscore
+include:
+  - _data
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
