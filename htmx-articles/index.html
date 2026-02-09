@@ -150,10 +150,6 @@
       opacity: 1;
     }
 
-    .htmx-request.htmx-indicator {
-      opacity: 1;
-    }
-
     .loading-spinner {
       text-align: center;
       padding: 40px;
@@ -255,61 +251,6 @@
     <p>Loading...</p>
   </div>
 
-  <script>
-    // Simple HTMX-like implementation for this template
-    document.addEventListener('DOMContentLoaded', function() {
-      // Handle all clicks on elements with hx-get attribute
-      document.addEventListener('click', function(e) {
-        let target = e.target;
-        
-        // Find the element with hx-get (could be the target or a parent)
-        while (target && !target.hasAttribute('hx-get')) {
-          target = target.parentElement;
-        }
-        
-        if (target && target.hasAttribute('hx-get')) {
-          e.preventDefault();
-          
-          const url = target.getAttribute('hx-get');
-          const targetSelector = target.getAttribute('hx-target');
-          const swapStyle = target.getAttribute('hx-swap') || 'innerHTML';
-          
-          // Find the target element to update
-          const targetElement = document.querySelector(targetSelector);
-          
-          if (targetElement) {
-            // Add loading class
-            targetElement.classList.add('htmx-request');
-            
-            // Fetch the content
-            fetch(url)
-              .then(response => response.text())
-              .then(html => {
-                // Add swapping class for animation
-                targetElement.classList.add('htmx-swapping');
-                
-                // Update the content
-                targetElement.innerHTML = html;
-                
-                // Remove loading class
-                targetElement.classList.remove('htmx-request');
-                
-                // Remove swapping class after animation
-                setTimeout(() => {
-                  targetElement.classList.remove('htmx-swapping');
-                }, 400);
-                
-                // Scroll to top of content
-                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              })
-              .catch(error => {
-                console.error('Error loading content:', error);
-                targetElement.classList.remove('htmx-request');
-              });
-          }
-        }
-      });
-    });
-  </script>
+  <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
 </body>
 </html>
