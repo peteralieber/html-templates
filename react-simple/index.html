@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docs Template - React</title>
+
+  <!-- OpenCode font and colors -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for social media icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- React and ReactDOM from CDN -->
+  <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <!-- Babel Standalone for JSX transformation (for demo/prototyping - use build step for production) -->
+  <script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+
+  <style>
+    /* --- Base Reset --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Header height: 16px top padding + 16px bottom padding + 40px logo height + 1px border = 73px */
+      --header-height: 73px;
+    }
+
+    body {
+      font-family: 'IBM Plex Mono', ui-monospace, Consolas, system-ui, sans-serif;
+      color: #1a1a1a;
+      background: #fafafa;
+      line-height: 1.6;
+    }
+
+    /* --- Header --- */
+    .header {
+      background: #ffffff;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .social-links a {
+      color: #666;
+      font-size: 1.25rem;
+      transition: color 0.15s;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .social-links a:hover {
+      color: #1a1a1a;
+    }
+
+    .search-container {
+      position: relative;
+    }
+
+    .search-box {
+      padding: 8px 36px 8px 12px;
+      border: 1px solid #d0d0d0;
+      border-radius: 6px;
+      font-family: 'IBM Plex Mono', ui-monospace, Consolas, system-ui, sans-serif;
+      font-size: 0.9rem;
+      width: 200px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      background: #fafafa;
+    }
+
+    .search-box:focus {
+      outline: none;
+      border-color: #888;
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+      background: #ffffff;
+    }
+
+    .search-box::placeholder {
+      color: #999;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+      pointer-events: none;
+      font-size: 0.9rem;
+    }
+
+    /* --- Layout --- */
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* --- Sidebar --- */
+    .sidebar {
+      width: 260px;
+      background: #ffffff;
+      border-right: 1px solid #e5e5e5;
+      padding: 24px;
+      position: sticky;
+      top: var(--header-height);
+      height: calc(100vh - var(--header-height));
+      overflow-y: auto;
+    }
+
+    .sidebar-header {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .nav-item {
+      padding: 8px 4px;
+      color: #444;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.15s;
+    }
+
+    .nav-item:hover {
+      background: #f0f0f0;
+    }
+
+    .nav-item.active {
+      font-weight: 600;
+      color: #000;
+    }
+
+    /* --- Main Content --- */
+    .content {
+      flex: 1;
+      padding: 48px;
+      max-width: 800px;
+    }
+
+    .content h1 {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .content h2 {
+      font-size: 1.4rem;
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+
+    .content p {
+      margin-bottom: 16px;
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-top: 8px;
+    }
+
+    .code-block {
+      background: #f5f5f5;
+      border: 1px solid #e0e0e0;
+      padding: 16px;
+      border-radius: 6px;
+      margin: 20px 0;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 900px) {
+      .sidebar {
+        display: none;
+      }
+
+      .content {
+        padding: 24px;
+      }
+
+      .header {
+        padding: 12px 16px;
+      }
+      
+      .logo-text {
+        font-size: 1.1rem;
+      }
+
+      .logo-icon {
+        width: 32px;
+        height: 32px;
+      }
+      
+      .header-right {
+        gap: 12px;
+      }
+
+      .search-box {
+        width: 150px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .social-links {
+        gap: 12px;
+      }
+
+      .social-links a {
+        font-size: 1.1rem;
+      }
+
+      .search-box {
+        width: 120px;
+        font-size: 0.85rem;
+        padding: 6px 32px 6px 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    // Header Component
+    function Header() {
+      return (
+        <header className="header">
+          <div className="header-logo">
+            <svg className="logo-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+              {/* React atom logo */}
+              <g>
+                {/* Center dot */}
+                <circle cx="20" cy="20" r="3" fill="#61dafb"/>
+                
+                {/* Three ellipses forming the atom */}
+                <ellipse cx="20" cy="20" rx="15" ry="6" fill="none" stroke="#61dafb" strokeWidth="1.5"/>
+                <ellipse cx="20" cy="20" rx="15" ry="6" fill="none" stroke="#61dafb" strokeWidth="1.5" transform="rotate(60 20 20)"/>
+                <ellipse cx="20" cy="20" rx="15" ry="6" fill="none" stroke="#61dafb" strokeWidth="1.5" transform="rotate(120 20 20)"/>
+              </g>
+            </svg>
+            <span className="logo-text">React Simple</span>
+          </div>
+          
+          <div className="header-right">
+            <nav className="social-links">
+              <a href="https://github.com/peteralieber" target="_blank" rel="noopener" title="GitHub">
+                <i className="fab fa-github"></i>
+              </a>
+              <a href="https://x.com/PeterALieber" target="_blank" rel="noopener" title="X">
+                <i className="fab fa-x"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/peterlieber" target="_blank" rel="noopener" title="LinkedIn">
+                <i className="fab fa-linkedin"></i>
+              </a>
+            </nav>
+            
+            <div className="search-container">
+              <input type="search" className="search-box" placeholder="Search docs..." />
+              <i className="fas fa-search search-icon"></i>
+            </div>
+          </div>
+        </header>
+      );
+    }
+
+    // Sidebar Component
+    function Sidebar() {
+      const [activeItem, setActiveItem] = useState('Intro');
+      const navItems = ['Intro', 'Install', 'Configure', 'Usage', 'Troubleshooting'];
+
+      return (
+        <aside className="sidebar">
+          <div className="sidebar-header">MyDocs</div>
+          <nav className="sidebar-nav">
+            {navItems.map(item => (
+              <a
+                key={item}
+                href="#"
+                className={`nav-item ${activeItem === item ? 'active' : ''}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActiveItem(item);
+                }}
+              >
+                {item}
+              </a>
+            ))}
+          </nav>
+        </aside>
+      );
+    }
+
+    // Main Content Component
+    function MainContent() {
+      return (
+        <main className="content">
+          <h1>Intro</h1>
+          <p>
+            This is a minimal static template inspired by the OpenCode documentation layout.
+            Built with React — a JavaScript library for building user interfaces.
+          </p>
+
+          <h2>Overview</h2>
+          <p>
+            You can expand this into a full documentation system with markdown rendering,
+            search, or multi-page navigation.
+          </p>
+
+          <pre className="code-block">
+curl -fsSL https://example.com/install | bash
+          </pre>
+
+          <h2>Next Steps</h2>
+          <ul>
+            <li>Add more pages</li>
+            <li>Customize the theme</li>
+            <li>Integrate a static site generator (optional)</li>
+          </ul>
+        </main>
+      );
+    }
+
+    // App Component
+    function App() {
+      return (
+        <>
+          <Header />
+          <div className="layout">
+            <Sidebar />
+            <MainContent />
+          </div>
+        </>
+      );
+    }
+
+    // Render the app
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
