@@ -1,0 +1,80 @@
+<div class="article-content">
+  <a href="#" 
+     hx-get="partials/home.html" 
+     hx-target="#main-content" 
+     hx-swap="innerHTML swap:0.4s"
+     hx-push-url="false"
+     class="back-link">Back to all articles</a>
+
+  <h1>Static Sites with Dynamic Features</h1>
+  <div class="meta">Published: February 10, 2024 • 4 min read • By Jamie Peterson</div>
+
+  <p>Static sites have made a comeback in recent years, and for good reason. They're fast, secure, and easy to deploy. But many developers assume that "static" means "boring" or "limited." With HTMX, you can have the best of both worlds: the simplicity and performance of static HTML with the dynamic features users expect.</p>
+
+  <h2>The Static Site Advantage</h2>
+  
+  <p>Static sites—collections of pre-built HTML, CSS, and JavaScript files—offer several compelling advantages:</p>
+
+  <p><strong>Performance:</strong> No server-side processing means pages load instantly. Your HTML is ready to go the moment a user requests it.</p>
+
+  <p><strong>Security:</strong> With no server-side code execution, there's a much smaller attack surface. No database to compromise, no server-side vulnerabilities to exploit.</p>
+
+  <p><strong>Scalability:</strong> Static files can be served from a CDN, making your site fast anywhere in the world. Handling traffic spikes is trivial.</p>
+
+  <p><strong>Simplicity:</strong> No complex server infrastructure to maintain. Just files on a CDN.</p>
+
+  <h2>Adding Interactivity</h2>
+
+  <p>Traditional static sites are limited to simple page-to-page navigation. Every click means a full page reload. But with HTMX, you can add smooth, app-like interactions while keeping your site fundamentally static.</p>
+
+  <p>This very article system demonstrates this perfectly. Each article is a static HTML file—no server-side rendering, no database queries. But when you click an article, HTMX loads it smoothly without a jarring page reload. It feels like a single-page application, but it's built with simple, static files.</p>
+
+  <h2>How It Works</h2>
+
+  <p>The magic happens through HTMX's ability to fetch HTML fragments and swap them into your page. Here's what happens behind the scenes:</p>
+
+  <p>1. User clicks an article link</p>
+  <p>2. HTMX intercepts the click and makes an AJAX request</p>
+  <p>3. The server (or CDN) returns a static HTML fragment</p>
+  <p>4. HTMX smoothly swaps this fragment into the page</p>
+
+  <p>From the server's perspective, you're just serving static files. But from the user's perspective, it's a smooth, modern application.</p>
+
+  <h2>Deployment and Hosting</h2>
+
+  <p>Because everything is static, you can host these sites anywhere—GitHub Pages, Netlify, Vercel, AWS S3, or any traditional web host. There's no need for Node.js servers, PHP, or any other runtime environment. Just upload your files and you're done.</p>
+
+  <p>This simplicity extends to your development workflow too. No build steps are strictly necessary (though you can add them if you want). You can edit your HTML files directly and see changes immediately.</p>
+
+  <h2>Use Cases</h2>
+
+  <p>This approach works brilliantly for many types of sites:</p>
+
+  <p>• <strong>Blogs and documentation:</strong> Like this article system, perfect for content-heavy sites</p>
+  <p>• <strong>Portfolios:</strong> Showcase your work with smooth transitions between projects</p>
+  <p>• <strong>Marketing sites:</strong> Create engaging landing pages without complex infrastructure</p>
+  <p>• <strong>Internal tools:</strong> Build simple dashboards and tools that can be hosted anywhere</p>
+
+  <h2>When Not to Use Static Sites</h2>
+
+  <p>To be fair, static sites aren't appropriate for everything. If you need:</p>
+
+  <p>• User authentication and personalized content</p>
+  <p>• Real-time data that changes frequently</p>
+  <p>• Complex server-side logic</p>
+  <p>• Database-driven dynamic content</p>
+
+  <p>Then you'll need some server-side processing. But even in these cases, you can often use a hybrid approach—static pages enhanced with API calls for dynamic data.</p>
+
+  <h2>The Jamstack Connection</h2>
+
+  <p>This approach aligns perfectly with the Jamstack architecture (JavaScript, APIs, and Markup). Your markup is pre-built and static, JavaScript (via HTMX) adds interactivity, and you can call APIs when you need truly dynamic data.</p>
+
+  <p>Many Jamstack sites use complex build processes and JavaScript frameworks. But with HTMX, you can achieve similar results with far less complexity. Sometimes simpler really is better.</p>
+
+  <h2>Conclusion</h2>
+
+  <p>Static sites don't have to be static in the traditional sense. With HTMX, you can create engaging, interactive experiences while maintaining the simplicity, security, and performance that static sites offer. It's a powerful combination that works well for a wide range of projects.</p>
+
+  <p>Whether you're building a blog, a portfolio, or a marketing site, consider whether you really need a complex backend. You might find that static files and a bit of HTMX can give you everything you need.</p>
+</div>
