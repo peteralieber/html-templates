@@ -1,0 +1,68 @@
+<div class="article-content">
+  <a href="#" 
+     hx-get="partials/home.html" 
+     hx-target="#main-content" 
+     hx-swap="innerHTML swap:0.4s"
+     hx-push-url="false"
+     class="back-link">Back to all articles</a>
+
+  <h1>The Power of Progressive Enhancement</h1>
+  <div class="meta">Published: February 1, 2024 • 6 min read • By Alexandra Kim</div>
+
+  <p>Progressive enhancement is a web design strategy that emphasizes core content first, then progressively adds layers of presentation and features for browsers that can support them. It's a philosophy that has been around since the early days of the web, but it's more relevant today than ever.</p>
+
+  <h2>What is Progressive Enhancement?</h2>
+  
+  <p>At its core, progressive enhancement is about starting with a solid foundation and building up. You begin with semantic HTML that works everywhere, then add CSS for visual presentation, and finally JavaScript for enhanced interactivity. Each layer enhances the experience but isn't required for basic functionality.</p>
+
+  <p>This approach contrasts sharply with graceful degradation, where you build a fully-featured application and then try to make it work for less capable browsers. Progressive enhancement starts accessible and builds up, while graceful degradation starts complex and tries to simplify.</p>
+
+  <h2>Why It Matters</h2>
+
+  <p>In an era where we have incredibly powerful JavaScript frameworks, why should we care about progressive enhancement? Several reasons:</p>
+
+  <p><strong>Accessibility:</strong> Not all users have the same capabilities. Some use screen readers, some have JavaScript disabled for security or performance reasons, and some are on slow connections where large JavaScript bundles take forever to download.</p>
+
+  <p><strong>Resilience:</strong> Things break. Networks fail, CDNs go down, and JavaScript errors happen. A progressively enhanced site continues to function even when something goes wrong.</p>
+
+  <p><strong>Performance:</strong> Starting with HTML means your content is available immediately. Users don't have to wait for JavaScript to download, parse, and execute before they can read your content.</p>
+
+  <h2>HTMX and Progressive Enhancement</h2>
+
+  <p>HTMX is designed with progressive enhancement in mind. When you use HTMX attributes on standard HTML elements like links and buttons, you're enhancing their behavior rather than replacing it. If HTMX doesn't load, the link still works—it just triggers a full page load instead of an AJAX request.</p>
+
+  <p>Consider this article system. Each article link has an href attribute that would work even without JavaScript. The hx-get attribute enhances the link to load content dynamically, but the basic link functionality remains intact.</p>
+
+  <h2>Building with Layers</h2>
+
+  <p>A progressively enhanced application is built in layers:</p>
+
+  <p><strong>Layer 1 - HTML:</strong> Semantic markup that provides content and basic structure. This is your baseline functionality.</p>
+
+  <p><strong>Layer 2 - CSS:</strong> Visual presentation and layout. Makes your site look good but doesn't affect functionality.</p>
+
+  <p><strong>Layer 3 - JavaScript:</strong> Interactive enhancements. HTMX, in particular, adds smooth transitions and partial page updates.</p>
+
+  <p>Each layer enhances the user experience, but the site remains functional without any of the higher layers.</p>
+
+  <h2>Real-World Benefits</h2>
+
+  <p>Progressive enhancement isn't just a theoretical ideal—it has real, measurable benefits:</p>
+
+  <p>• <strong>Faster time to interactive:</strong> Users can start consuming content immediately, before JavaScript loads</p>
+  <p>• <strong>Better SEO:</strong> Search engines can easily crawl your content since it's in the HTML</p>
+  <p>• <strong>Wider compatibility:</strong> Your site works on more devices and browsers</p>
+  <p>• <strong>Improved reliability:</strong> Fewer points of failure mean a more robust application</p>
+
+  <h2>Common Misconceptions</h2>
+
+  <p>Some developers think progressive enhancement means building everything twice—once for JavaScript-enabled browsers and once for non-JavaScript browsers. That's not true. With tools like HTMX, you build once, and the enhancement happens automatically.</p>
+
+  <p>Others think it limits what you can build. Again, not true. Progressive enhancement is about ensuring your core functionality works everywhere, not about avoiding advanced features. You can still build rich, interactive applications—they just need to degrade gracefully.</p>
+
+  <h2>Conclusion</h2>
+
+  <p>Progressive enhancement isn't about limiting yourself—it's about building resilient, accessible applications that work for everyone. By starting with solid HTML and enhancing from there, you create experiences that are fast, reliable, and inclusive.</p>
+
+  <p>HTMX makes progressive enhancement easy by providing a bridge between static HTML and dynamic applications. You get the best of both worlds: the simplicity and reliability of HTML with the interactivity users expect from modern web applications.</p>
+</div>

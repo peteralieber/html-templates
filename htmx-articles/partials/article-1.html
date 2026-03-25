@@ -1,0 +1,53 @@
+<div class="article-content">
+  <a href="#" 
+     hx-get="partials/home.html" 
+     hx-target="#main-content" 
+     hx-swap="innerHTML swap:0.4s"
+     hx-push-url="false"
+     class="back-link">Back to all articles</a>
+
+  <h1>Getting Started with HTMX</h1>
+  <div class="meta">Published: January 15, 2024 • 5 min read • By Sarah Chen</div>
+
+  <p>HTMX is a powerful library that allows you to access modern browser features directly from HTML, rather than using JavaScript. It extends HTML with attributes that enable AJAX requests, CSS transitions, WebSockets, and Server-Sent Events directly in your markup.</p>
+
+  <h2>Why HTMX?</h2>
+  
+  <p>In today's web development landscape, we've become accustomed to heavy JavaScript frameworks that add complexity and bundle size to our applications. HTMX takes a different approach—it embraces HTML as a hypertext medium and enhances it with the capabilities needed for modern interactive applications.</p>
+
+  <p>With HTMX, you can create dynamic, interactive experiences using simple HTML attributes. No build steps, no complex state management, no virtual DOM—just HTML that works the way the web was meant to work.</p>
+
+  <h2>Core Concepts</h2>
+
+  <p>HTMX introduces a set of attributes that you can add to any HTML element:</p>
+
+  <p><strong>hx-get, hx-post, hx-put, hx-delete:</strong> These attributes allow you to issue HTTP requests from any element, not just forms and links. You can trigger AJAX requests from buttons, divs, or any other element.</p>
+
+  <p><strong>hx-target:</strong> Specifies where the response from an HTMX request should be placed in the DOM. This gives you fine-grained control over what parts of your page update.</p>
+
+  <p><strong>hx-swap:</strong> Controls how the response replaces the target element. You can choose to replace the inner HTML, the outer HTML, prepend, append, and more.</p>
+
+  <h2>Getting Started</h2>
+
+  <p>The beauty of HTMX is its simplicity. To get started, you just need to include the library in your HTML:</p>
+
+  <p>Once included, you can start using HTMX attributes in your markup. For example, clicking a button can load new content without a full page refresh, all with just a few HTML attributes.</p>
+
+  <h2>Real-World Applications</h2>
+
+  <p>HTMX shines in scenarios where you need dynamic content updates without the overhead of a full JavaScript framework. It's perfect for:</p>
+
+  <p>• Loading content on demand (like this article system)</p>
+  <p>• Infinite scrolling and pagination</p>
+  <p>• Form validation and submission</p>
+  <p>• Live search and filtering</p>
+  <p>• Polling for updates</p>
+
+  <p>The library works seamlessly with any backend—whether you're using Python, Node.js, Ruby, PHP, or any other server-side technology. Your server just returns HTML fragments, and HTMX handles inserting them into your page.</p>
+
+  <h2>Conclusion</h2>
+
+  <p>HTMX represents a return to simplicity in web development. By enhancing HTML rather than replacing it, HTMX allows developers to create sophisticated interactive applications with minimal complexity. Whether you're building a simple blog or a complex web application, HTMX provides the tools you need while keeping your codebase clean and maintainable.</p>
+
+  <p>In our next article, we'll explore how to build complete dynamic UIs without any JavaScript frameworks.</p>
+</div>
